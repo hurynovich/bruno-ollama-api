@@ -1,0 +1,34 @@
+meta {
+  name: Generate a chat message
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url_base}}/api/generate
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "model": "gemma3:1b",
+    "prompt": "Hello LLM!",
+    "suffix": "-------------------------------",
+    "images": [
+  
+    ],
+    "format": "json",
+    "system": "Some system prompt",
+    //When true, returns a stream of partial responses
+    "stream": true,
+    //true/false or "high", "medium", "low"
+    "think": false,
+    "raw": true,
+    "keep_alive": "5m"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,47 @@
+meta {
+  name: Generate embeddings
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url_base}}/api/embed
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    //string: Model name
+    "model": "gemma3:1b",
+    //string: Text or array of texts to generate embeddings for
+    "input": "Some text to convert to input.",
+    //boolean: If true, truncate inputs that exceed the context window. If false, returns an error.
+    "truncate": true,
+    //input: Number of dimensions to generate embeddings for
+    "dimensions": 4,
+    "options": {
+      "seed": 1,
+      "temperature": 1.0,
+      //integer: Limits next token selection to the K most likely
+      "top_k": 1,
+      //float: Cumulative probability threshold for nucleus sampling
+      "top_p": 1.0,
+      //float: Minimum probability threshold for token selection
+      "min_p": 1.0,
+      //string: Stop sequences that will halt generation
+      "stop": [
+        "\n"
+      ],
+      //integer: Context length size (number of tokens)
+      "num_ctx": 1024,
+      //integer: Maximum number of tokens to generate
+      "num_predict": 100
+    }
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
